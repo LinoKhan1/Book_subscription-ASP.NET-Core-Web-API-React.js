@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "U4OhlkRiO0dBTqvGmm03t3bLBCt7ztnF2f4s4YnRbwU=",
+  "Source": "Book_subscription.Server",
+  "BasePath": "_content/Book_subscription.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\User\\source\\repos\\Book_subscription\\book_subscription.client\\book_subscription.client.esproj",
+      "Version": 2,
+      "Source": "book_subscription.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

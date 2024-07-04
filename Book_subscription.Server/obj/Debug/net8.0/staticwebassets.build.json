@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "U4OhlkRiO0dBTqvGmm03t3bLBCt7ztnF2f4s4YnRbwU=",
+  "Hash": "EQYK6FQfgAdLdJl/71ITfaRtncJ0qUrB0xUlqYyc3jU=",
   "Source": "Book_subscription.Server",
   "BasePath": "_content/Book_subscription.Server",
   "Mode": "Default",
@@ -11,10 +11,10 @@
       "Version": 2,
       "Source": "book_subscription.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],

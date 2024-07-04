@@ -1,4 +1,4 @@
-﻿using Book_subscription.Server.API.DTOs;
+﻿using Book_subscription.Server.API.DTOs.Authentication;
 using Book_subscription.Server.Core.Entities;
 using Book_subscription.Server.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Book_subscription.Server.API.Controllers
 {
     [ApiController]
-    [Route("api/[controler]")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;

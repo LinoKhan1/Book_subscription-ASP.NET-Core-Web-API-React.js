@@ -1,4 +1,4 @@
-﻿using Book_subscription.Server.API.DTOs;
+﻿using Book_subscription.Server.API.DTOs.Authentication;
 using Book_subscription.Server.Core.Entities;
 using Book_subscription.Server.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;

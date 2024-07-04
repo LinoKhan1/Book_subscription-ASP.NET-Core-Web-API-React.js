@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
@@ -40,12 +41,6 @@
     <ProjectReference Include="..\book_subscription.client\book_subscription.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="API\DTOs\" />
-    <Folder Include="Infrastructure\unitOfWork\" />
-    <Folder Include="Infrastructure\Repositories\Interfaces\" />
   </ItemGroup>
 
 </Project>

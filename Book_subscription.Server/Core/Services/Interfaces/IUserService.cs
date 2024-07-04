@@ -1,4 +1,4 @@
-﻿using Book_subscription.Server.API.DTOs;
+﻿using Book_subscription.Server.API.DTOs.Authentication;
 
 namespace Book_subscription.Server.Core.Services.Interfaces
 {

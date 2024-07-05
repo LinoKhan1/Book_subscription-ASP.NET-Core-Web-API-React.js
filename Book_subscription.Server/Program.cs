@@ -4,6 +4,10 @@ using Book_subscription.Server.Core.Entities;
 using Book_subscription.Server.Core.Services;
 using Book_subscription.Server.Core.Services.Interfaces;
 using Book_subscription.Server.Infrastructure.Data;
+using Book_subscription.Server.Infrastructure.Repositories;
+using Book_subscription.Server.Infrastructure.Repositories.Interfaces;
+using Book_subscription.Server.Infrastructure.unitOfWork;
+using Book_subscription.Server.Infrastructure.unitOfWork.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -72,14 +76,21 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Register repositories
+// Register repositories in the DI Container
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();  
+builder.Services.AddScoped<IResellerRepository, ResellerRepository>();
 
-// Register services
+
+// Register services in the DI Container
 builder.Services.AddScoped<IJwtAuthService, JwtAuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
-
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();    
+builder.Services.AddScoped<IResellerService, ResellerService>();    
 
 // Register Unit Of Work
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();  
 
 var app = builder.Build();
 

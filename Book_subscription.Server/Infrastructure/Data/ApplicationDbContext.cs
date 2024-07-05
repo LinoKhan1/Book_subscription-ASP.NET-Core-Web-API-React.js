@@ -22,6 +22,11 @@ namespace Book_subscription.Server.Infrastructure.Data
         /// Gets or sets the DbSet of books in the database.
         /// </summary>
         public DbSet<Book> Books { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DbSet of resellers in the database
+        /// </summary>
+        public DbSet<Reseller> Resellers { get; set; }  
         
         /// <summary>
         /// Gets or sets the DbSet for Books.

@@ -5,7 +5,7 @@ namespace Book_subscription.Server.Core.Services.Interfaces
     public interface IResellerService
     {
 
-        Task<Reseller> RegisterResellerAsync(string name);
+        Task<string> RegisterResellerAsync(Reseller reseller);
         Task<Reseller> GetResellerByApiKeyAsync(string apiKey);
 
 

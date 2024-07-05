@@ -7,22 +7,22 @@ namespace Book_subscription.Server.Core.Services
     public class ResellerService : IResellerService
     {
         private readonly IResellerRepository _resellerRepository;
+        private readonly IApiKeyService _apiKeyService;
 
-        public ResellerService(IResellerRepository resellerRepository)
+        public ResellerService(IResellerRepository resellerRepository, IApiKeyService apiKeyService)
         {
             _resellerRepository = resellerRepository;
+            _apiKeyService = apiKeyService;
         }
 
-        public async Task<Reseller> RegisterResellerAsync(string name)
+        public async Task<string> RegisterResellerAsync(Reseller reseller)
         {
-            var apiKey = GenerateApiKey();
-            var reseller = new Reseller
-            {
-                Name = name,
-                ApiKey = apiKey
-            };
+            // Add reseller to the database
+            await _resellerRepository.AddResellerAsync(reseller);
 
-            return await _resellerRepository.AddResellerAsync(reseller);
+            // Generate API key for the reseller
+            var apiKey = await _apiKeyService.GenerateApiKeyAsync();
+            return apiKey;
         }
 
         public async Task<Reseller> GetResellerByApiKeyAsync(string apiKey)
@@ -30,9 +30,6 @@ namespace Book_subscription.Server.Core.Services
             return await _resellerRepository.GetResellerByApiKeyAsync(apiKey);
         }
 
-        private string GenerateApiKey()
-        {
-            return Convert.ToBase64String(Guid.NewGuid().ToByteArray());
-        }
+        
     }
 }

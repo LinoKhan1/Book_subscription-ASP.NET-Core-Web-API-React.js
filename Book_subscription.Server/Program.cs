@@ -62,7 +62,8 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-
+// API Key settings
+builder.Services.Configure<ApiKeySettings>(builder.Configuration.GetSection("ApiKeySettings"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -87,7 +88,8 @@ builder.Services.AddScoped<IJwtAuthService, JwtAuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();    
-builder.Services.AddScoped<IResellerService, ResellerService>();    
+builder.Services.AddScoped<IResellerService, ResellerService>();
+builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
 
 // Register Unit Of Work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();  

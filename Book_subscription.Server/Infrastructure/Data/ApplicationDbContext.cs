@@ -27,6 +27,11 @@ namespace Book_subscription.Server.Infrastructure.Data
         /// Gets or sets the DbSet of resellers in the database
         /// </summary>
         public DbSet<Reseller> Resellers { get; set; }  
+
+        /// <summary>
+        /// Gets or sets the DbtSet of ApiKeys in the databse for resellers authentication
+        /// </summary>
+        public DbSet<ApiKey> ApiKeys { get; set; }
         
         /// <summary>
         /// Gets or sets the DbSet for Books.

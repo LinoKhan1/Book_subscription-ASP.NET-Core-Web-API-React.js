@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Moq;
 using Xunit;
 
-namespace Book_subscription.tests.Services
+namespace Book_subscription.tests.Services.Unit
 {
     public class JwtAuthServiceTests
     {
@@ -65,9 +65,9 @@ namespace Book_subscription.tests.Services
             Assert.True(result);
         }
 
-        
 
-        
+
+
         // Add more test methods for other scenarios as described
 
     }

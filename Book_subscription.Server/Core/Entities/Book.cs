@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Book_subscription.Server.Core.Entities
 {
@@ -7,7 +8,7 @@ namespace Book_subscription.Server.Core.Entities
     /// </summary>
     public class Book
     {
-        
+       
         public int BookId { get; set; }
         [Required]
         [MaxLength(100)]

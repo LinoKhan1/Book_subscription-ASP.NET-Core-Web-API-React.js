@@ -462,3 +462,5 @@ C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\n
 C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\Microsoft.AspNetCore.TestHost.dll
 C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\obj\Debug\net8.0\MvcTestingAppManifest.json
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

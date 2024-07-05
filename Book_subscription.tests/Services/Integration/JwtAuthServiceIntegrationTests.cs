@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Options;
 using Xunit;
 
-namespace Book_subscription.tests.Services
+namespace Book_subscription.tests.Services.Integration
 {
     public class JwtAuthServiceIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     {

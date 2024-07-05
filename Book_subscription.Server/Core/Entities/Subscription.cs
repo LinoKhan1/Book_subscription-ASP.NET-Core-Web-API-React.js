@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 namespace Book_subscription.Server.Core.Entities
 {
@@ -8,7 +9,6 @@ namespace Book_subscription.Server.Core.Entities
     /// </summary>
     public class Subscription
     {
-
         public int SubsciptionId {  get; set; }
         public int BookId { get; set; }
         public string UserId { get; set; } 

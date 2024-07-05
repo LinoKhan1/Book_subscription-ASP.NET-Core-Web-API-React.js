@@ -1,4 +1,5 @@
 ﻿using Book_subscription.Server.API.DTOs;
+using Book_subscription.Server.API.DTOs.Authentication;
 using Book_subscription.Server.Core.Entities;
 using Book_subscription.Server.Core.Services;
 using Book_subscription.Server.Core.Services.Interfaces;
@@ -14,7 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Book_subscription.tests.Services
+namespace Book_subscription.tests.Services.Unit
 {
     /// <summary>
     /// Tests for the UserService class.
@@ -99,7 +100,7 @@ namespace Book_subscription.tests.Services
                 Password = "Password@123"
             };
 
-            var errorDescription = "Username already taken."; 
+            var errorDescription = "Username already taken.";
 
             _mockUserManager.Setup(x => x.CreateAsync(It.IsAny<User>(), It.IsAny<string>()))
                             .ReturnsAsync(IdentityResult.Failed(new IdentityError { Description = errorDescription }));

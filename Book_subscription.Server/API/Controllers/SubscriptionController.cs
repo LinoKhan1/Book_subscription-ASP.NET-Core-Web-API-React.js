@@ -32,11 +32,11 @@ namespace Book_subscription.Server.API.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = ex.Message });
+                return StatusCode(500, ex.Message );
             }
         }
 
@@ -51,7 +51,7 @@ namespace Book_subscription.Server.API.Controllers
                 if (userId != null) 
                 {
                     await _subscriptionService.UnsubscribeAsync(bookId, userId);
-                    return Ok(new { message = "Unsubscribed successfully." });
+                    return Ok("Unsubscribed successfully.");
                 }
                 else
                 {

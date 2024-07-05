@@ -29,6 +29,7 @@ namespace Book_subscription.Server.Infrastructure.Repositories
         public async Task AddBookAsync(Book book)
         {
             await _context.Books.AddAsync(book);
+
         }
 
         public async Task UpdateBookAsync(Book book)

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Book_subscription.tests.Controllers
+namespace Book_subscription.tests.Controllers.Integration
 {
     public class AuthControllerIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     {

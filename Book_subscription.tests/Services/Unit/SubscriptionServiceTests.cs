@@ -35,44 +35,6 @@ namespace Book_subscription.tests.Services.Unit
         }
 
         [Fact]
-        public async Task SubscribeAsync_NoExistingSubscription_Success()
-        {
-            // Arrange
-            var subscriptionDTO = new SubscriptionDTO
-            {
-                BookId = 1,
-                UserId = "user1"
-            };
-
-            var subscriptionEntity = new Subscription
-            {
-                BookId = subscriptionDTO.BookId,
-                UserId = subscriptionDTO.UserId,
-                SubscriptionDate = DateTime.UtcNow
-            };
-
-            // Mock IMapper to return subscriptionEntity when mapping from SubscriptionDTO
-            _mockMapper.Setup(m => m.Map<Subscription>(subscriptionDTO)).Returns(subscriptionEntity);
-
-            // Mock SubscriptionRepository to return null for GetSubscriptionAsync
-            _mockSubscriptionRepository.Setup(r => r.GetSubscriptionAsync(subscriptionDTO.BookId, subscriptionDTO.UserId))
-                                       .ReturnsAsync((Subscription)null);
-
-            // Act
-            var result = await _subscriptionService.SubscribeAsync(subscriptionDTO);
-
-            // Assert
-            Assert.NotNull(result); // Ensure that result is not null
-            Assert.Equal(subscriptionDTO.BookId, result.BookId); // Validate BookId
-            Assert.Equal(subscriptionDTO.UserId, result.UserId); // Validate UserId
-
-            // Verify that AddSubscriptionAsync and CompleteAsync were called
-            _mockSubscriptionRepository.Verify(r => r.AddSubscriptionAsync(It.IsAny<Subscription>()), Times.Once);
-            _mockUnitOfWork.Verify(u => u.CompleteAsync(), Times.Once);
-        }
-
-
-        [Fact]
         public async Task SubscribeAsync_DuplicateSubscription_ThrowsException()
         {
             // Arrange

@@ -2,6 +2,7 @@
 using Book_subscription.Server.Core.Entities;
 using Book_subscription.Server.Core.Services.Interfaces;
 using Book_subscription.Server.Infrastructure.Data;
+using Book_subscription.Server.Infrastructure.unitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
@@ -13,11 +14,13 @@ namespace Book_subscription.Server.Core.Services
     {
         private readonly ApiKeySettings _apiKeySettings;
         private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ApiKeyService(IOptions<ApiKeySettings> apiKeySettings, ApplicationDbContext context)
+        public ApiKeyService(IOptions<ApiKeySettings> apiKeySettings, ApplicationDbContext context, IUnitOfWork unitOfWork)
         {
             _apiKeySettings = apiKeySettings.Value;
             _context = context;
+            _unitOfWork = unitOfWork;
 
         }
 
@@ -34,12 +37,12 @@ namespace Book_subscription.Server.Core.Services
             };
 
             _context.ApiKeys.Add(apiKeyEntity);
-            await _context.SaveChangesAsync();  
+            await _unitOfWork.CompleteAsync(); 
 
             return apiKey;
         }
 
-        private string HashApiKey(string apiKey)
+        public string HashApiKey(string apiKey)
         {
             using var sha256 = SHA256.Create();
             var hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(apiKey));

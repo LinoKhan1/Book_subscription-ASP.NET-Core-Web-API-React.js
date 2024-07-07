@@ -113,6 +113,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseMiddleware<ApiKeyAuthenticationMiddleware>();
 
 app.MapControllers();
 

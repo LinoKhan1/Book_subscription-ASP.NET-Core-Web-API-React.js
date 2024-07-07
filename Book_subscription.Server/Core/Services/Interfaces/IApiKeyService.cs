@@ -3,6 +3,9 @@
     public interface IApiKeyService
     {
         Task<string> GenerateApiKeyAsync();
+
         Task<bool> ValidateApiKeyAsync(string apiKey);
+
+        string HashApiKey(string apiKey);   
     }
 }

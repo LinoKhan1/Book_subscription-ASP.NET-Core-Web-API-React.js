@@ -4,6 +4,7 @@ using Book_subscription.Server.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_subscription.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240707145720_ApiKeyEntity")]
+    partial class ApiKeyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,11 +94,11 @@ namespace Book_subscription.Server.Migrations
 
             modelBuilder.Entity("Book_subscription.Server.Core.Entities.Subscription", b =>
                 {
-                    b.Property<int>("SubscriptionId")
+                    b.Property<int>("SubsciptionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubsciptionId"));
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
@@ -107,7 +110,7 @@ namespace Book_subscription.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("SubscriptionId");
+                    b.HasKey("SubsciptionId");
 
                     b.HasIndex("BookId");
 

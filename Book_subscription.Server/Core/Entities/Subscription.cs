@@ -9,7 +9,7 @@ namespace Book_subscription.Server.Core.Entities
     /// </summary>
     public class Subscription
     {
-        public int SubsciptionId {  get; set; }
+        public int SubscriptionId {  get; set; }
         public int BookId { get; set; }
         public string UserId { get; set; } 
         public DateTime SubscriptionDate { get; set; }

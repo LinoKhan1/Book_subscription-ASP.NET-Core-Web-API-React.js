@@ -28,7 +28,7 @@ namespace Book_subscription.tests.Repositories
         public BookRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "BookDatabase")
+                .UseInMemoryDatabase(databaseName: "BookDatabaseTest")
                 .Options;
             _context = new ApplicationDbContext(_options);
             _repository = new BookRepository(_context);

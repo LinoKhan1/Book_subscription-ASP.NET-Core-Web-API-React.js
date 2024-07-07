@@ -43,7 +43,7 @@ namespace Book_subscription.Server.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Subscription>()
-                .HasKey(x => x.SubsciptionId);
+                .HasKey(x => x.SubscriptionId);
 
             // Configure relationships and constraints
             

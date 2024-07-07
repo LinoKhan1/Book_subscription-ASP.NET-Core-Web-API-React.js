@@ -1,6 +1,7 @@
 ﻿using Book_subscription.Server.API.DTOs.Book;
 using Book_subscription.Server.Core.Entities;
 using Book_subscription.Server.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_subscription.Server.API.Controllers
@@ -16,6 +17,8 @@ namespace Book_subscription.Server.API.Controllers
             _bookService = bookService;
         }
         [HttpGet]
+        [AllowAnonymous] // Allow anonymous access for all users
+
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
             var books = await _bookService.GetBooksAsync();
@@ -23,6 +26,8 @@ namespace Book_subscription.Server.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous] // Allow anonymous access for all users
+
         public async Task<ActionResult<Book>> GetBook(int id)
         {
             var book = await _bookService.GetBookByIdAsync(id);
@@ -33,6 +38,8 @@ namespace Book_subscription.Server.API.Controllers
             return Ok(book);
         }
         [HttpPost]
+        [Authorize(Roles = "Reseller")] // Restrict access to resellers only
+
         public async Task<ActionResult<Book>> AddBook([FromBody] BookDTO bookDTO)
         {
             if (!ModelState.IsValid)
@@ -51,6 +58,8 @@ namespace Book_subscription.Server.API.Controllers
             return CreatedAtAction(nameof(GetBook), new { id = addedBook.BookId }, addedBook);
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Reseller")] // Restrict access to resellers only
+
         public async Task<IActionResult> UpdateBook(int id, [FromBody] BookDTO bookDTO)
         {
             try
@@ -78,6 +87,8 @@ namespace Book_subscription.Server.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Reseller")] // Restrict access to resellers only
+
         public async Task<IActionResult> DeleteBook(int id)
         {
             try

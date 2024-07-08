@@ -18,6 +18,7 @@
     <PackageJsonDevdependenciesEslintPluginReact Condition="$(PackageJsonDevdependenciesEslintPluginReact) == ''">^7.34.2</PackageJsonDevdependenciesEslintPluginReact>
     <PackageJsonDevdependenciesEslintPluginReactHooks Condition="$(PackageJsonDevdependenciesEslintPluginReactHooks) == ''">^4.6.2</PackageJsonDevdependenciesEslintPluginReactHooks>
     <PackageJsonDevdependenciesEslintPluginReactRefresh Condition="$(PackageJsonDevdependenciesEslintPluginReactRefresh) == ''">^0.4.7</PackageJsonDevdependenciesEslintPluginReactRefresh>
+    <PackageJsonDevdependenciesReactRouterDom Condition="$(PackageJsonDevdependenciesReactRouterDom) == ''">^6.24.1</PackageJsonDevdependenciesReactRouterDom>
     <PackageJsonDevdependenciesVite Condition="$(PackageJsonDevdependenciesVite) == ''">^5.3.1</PackageJsonDevdependenciesVite>
   </PropertyGroup>
 </Project>

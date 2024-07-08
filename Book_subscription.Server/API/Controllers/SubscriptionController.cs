@@ -8,6 +8,9 @@ using System.Security.Claims;
 
 namespace Book_subscription.Server.API.Controllers
 {
+    /// <summary>
+    /// Controller for managing subscriptions to books.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -16,12 +19,22 @@ namespace Book_subscription.Server.API.Controllers
         private readonly ISubscriptionService _subscriptionService;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Constructor for SubscriptionController.
+        /// </summary>
+        /// <param name="subscriptionService">The subscription service instance.</param>
+        /// <param name="mapper">The AutoMapper instance.</param>
         public SubscriptionController(ISubscriptionService subscriptionService, IMapper mapper)
         {
             _subscriptionService = subscriptionService;
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Endpoint for subscribing to a book.
+        /// </summary>
+        /// <param name="subscriptionDTO">The subscription data.</param>
+        /// <returns>ActionResult containing the subscribed subscriptionDTO.</returns>
         [HttpPost("subscribe")]
         public async Task<IActionResult> Subscribe([FromBody] SubscriptionDTO subscriptionDTO)
         {
@@ -40,6 +53,11 @@ namespace Book_subscription.Server.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint for unsubscribing from a book.
+        /// </summary>
+        /// <param name="bookId">The ID of the book to unsubscribe from.</param>
+        /// <returns>ActionResult indicating success or failure.</returns>
         [HttpDelete("unsubscribe/{bookId}")]
         public async Task<IActionResult> Unsubscribe(int bookId)
         {
@@ -65,6 +83,11 @@ namespace Book_subscription.Server.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint for retrieving subscription details for a book.
+        /// </summary>
+        /// <param name="bookId">The ID of the book.</param>
+        /// <returns>ActionResult containing the subscription details.</returns>
         [HttpGet("subscription/{bookId}")]
         public async Task<IActionResult> GetSubscription(int bookId)
         {

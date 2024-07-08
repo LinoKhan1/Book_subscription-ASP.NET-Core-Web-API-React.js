@@ -9,6 +9,9 @@ using System.Security.Claims;
 
 namespace Book_subscription.Server.API.Controllers
 {
+    /// <summary>
+    /// API controller for managing resellers.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ResellerController : ControllerBase
@@ -16,11 +19,22 @@ namespace Book_subscription.Server.API.Controllers
         private readonly IResellerService _resellerService;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResellerController"/> class.
+        /// </summary>
+        /// <param name="resellerService">The reseller service.</param>
+        /// <param name="mapper">The mapper instance.</param>
         public ResellerController(IResellerService resellerService, IMapper mapper)
         {
             _resellerService = resellerService;
             _mapper = mapper;
         }
+
+        /// <summary>
+        /// Registers a new reseller.
+        /// </summary>
+        /// <param name="resellerDTO">The data for the reseller to register.</param>
+        /// <returns>An IActionResult indicating the result of the registration operation.</returns>
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterReseller([FromBody] ResellerDTO resellerDTO)
@@ -34,7 +48,11 @@ namespace Book_subscription.Server.API.Controllers
             return Ok(registeredReseller);
 
         }
-
+        /// <summary>
+        /// Retrieves a reseller by its API key.
+        /// </summary>
+        /// <param name="apiKey">The API key of the reseller to retrieve.</param>
+        /// <returns>An IActionResult containing the reseller information if found, or NotFound if not found.</returns>
         [HttpGet("apikey/{apiKey}")]
         public async Task<IActionResult> GetResellerByApiKey(string apiKey)
         {

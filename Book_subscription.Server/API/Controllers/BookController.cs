@@ -6,40 +6,74 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Book_subscription.Server.API.Controllers
 {
+    /// <summary>
+    /// API controller for managing books.
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
+        private readonly ILogger<BookController> _logger;
 
-        public BookController(IBookService bookService)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BookController"/> class.
+        /// </summary>
+        /// <param name="bookService">The book service.</param>
+        /// <param name="logger">The logger.</param>
+        public BookController(IBookService bookService, ILogger<BookController> logger)
         {
             _bookService = bookService;
+            _logger = logger;
         }
+        /// <summary>
+        /// Retrieves all books.
+        /// </summary>
+        /// <returns>A list of books.</returns>
         [HttpGet]
-        [AllowAnonymous] // Allow anonymous access for all users
-
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
-            var books = await _bookService.GetBooksAsync();
-            return Ok(books);
+            try
+            {
+                var books = await _bookService.GetBooksAsync();
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving all books.");
+                return StatusCode(500, "Internal server error");
+            }
         }
-
+        /// <summary>
+        /// Retrieves a book by its identifier.
+        /// </summary>
+        /// <param name="id">The book identifier.</param>
+        /// <returns>The book with the specified identifier.</returns>
         [HttpGet("{id}")]
-        [AllowAnonymous] // Allow anonymous access for all users
-
         public async Task<ActionResult<Book>> GetBook(int id)
         {
-            var book = await _bookService.GetBookByIdAsync(id);
-            if (book == null)
+            try
             {
-                return NotFound();
+                var book = await _bookService.GetBookByIdAsync(id);
+                if (book == null)
+                {
+                    return NotFound();
+                }
+                return Ok(book);
             }
-            return Ok(book);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving the book with ID {BookId}.", id);
+                return StatusCode(500, "Internal server error");
+            }
         }
-        [HttpPost]
-        [Authorize(Roles = "Reseller")] // Restrict access to resellers only
 
+        /// <summary>
+        /// Adds a new book.
+        /// </summary>
+        /// <param name="bookDTO">The book data transfer object.</param>
+        /// <returns>The added book.</returns>
+        [HttpPost]
         public async Task<ActionResult<Book>> AddBook([FromBody] BookDTO bookDTO)
         {
             if (!ModelState.IsValid)
@@ -47,21 +81,39 @@ namespace Book_subscription.Server.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var book = new Book
+            try
             {
-                Name = bookDTO.Name,
-                Text = bookDTO.Text,
-                PurchasePrice = bookDTO.PurchasedPrice
-            };
+                var book = new Book
+                {
+                    Name = bookDTO.Name,
+                    Text = bookDTO.Text,
+                    PurchasePrice = bookDTO.PurchasedPrice
+                };
 
-            var addedBook = await _bookService.AddBookAsync(book);
-            return CreatedAtAction(nameof(GetBook), new { id = addedBook.BookId }, addedBook);
+                var addedBook = await _bookService.AddBookAsync(book);
+                return CreatedAtAction(nameof(GetBook), new { id = addedBook.BookId }, addedBook);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while adding a new book.");
+                return StatusCode(500, "Internal server error");
+            }
         }
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Reseller")] // Restrict access to resellers only
 
+        /// <summary>
+        /// Updates an existing book.
+        /// </summary>
+        /// <param name="id">The book identifier.</param>
+        /// <param name="bookDTO">The book data transfer object.</param>
+        /// <returns>No content if update is successful.</returns>
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBook(int id, [FromBody] BookDTO bookDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 var book = new Book
@@ -70,7 +122,6 @@ namespace Book_subscription.Server.API.Controllers
                     Name = bookDTO.Name,
                     Text = bookDTO.Text,
                     PurchasePrice = bookDTO.PurchasedPrice
-                    // Assuming other properties like Subscriptions are handled separately
                 };
 
                 await _bookService.UpdateBookAsync(id, book);
@@ -78,17 +129,22 @@ namespace Book_subscription.Server.API.Controllers
             }
             catch (ArgumentException ex)
             {
+                _logger.LogWarning(ex, "Book not found: {BookId}", id);
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(ex, "An error occurred while updating the book with ID {BookId}.", id);
+                return StatusCode(500, "Internal server error");
             }
         }
 
+        /// <summary>
+        /// Deletes a book by its identifier.
+        /// </summary>
+        /// <param name="id">The book identifier.</param>
+        /// <returns>No content if deletion is successful.</returns>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Reseller")] // Restrict access to resellers only
-
         public async Task<IActionResult> DeleteBook(int id)
         {
             try
@@ -98,11 +154,13 @@ namespace Book_subscription.Server.API.Controllers
             }
             catch (ArgumentException ex)
             {
+                _logger.LogWarning(ex, "Book not found: {BookId}", id);
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(ex, "An error occurred while deleting the book with ID {BookId}.", id);
+                return StatusCode(500, "Internal server error");
             }
         }
     }

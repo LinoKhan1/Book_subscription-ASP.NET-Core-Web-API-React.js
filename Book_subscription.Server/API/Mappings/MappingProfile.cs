@@ -9,8 +9,11 @@ namespace Book_subscription.Server.API.Mappings
     public class MappingProfile : Profile
     {
         public MappingProfile() 
-        { 
+        {
+            // Mapping from Subscription entity to SubscriptionDTO
             CreateMap<Subscription, SubscriptionDTO>();
+
+            // Bidirectional mapping between Reseller and ResellerDTO
             CreateMap<Reseller,ResellerDTO>().ReverseMap();
         }
     }

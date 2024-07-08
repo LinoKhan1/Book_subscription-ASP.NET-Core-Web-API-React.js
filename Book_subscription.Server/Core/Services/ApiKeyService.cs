@@ -15,32 +15,52 @@ namespace Book_subscription.Server.Core.Services
         private readonly ApiKeySettings _apiKeySettings;
         private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<ApiKeyService> _logger;
 
-        public ApiKeyService(IOptions<ApiKeySettings> apiKeySettings, ApplicationDbContext context, IUnitOfWork unitOfWork)
+        public ApiKeyService(IOptions<ApiKeySettings> apiKeySettings, ApplicationDbContext context, IUnitOfWork unitOfWork, ILogger<ApiKeyService> logger)
         {
             _apiKeySettings = apiKeySettings.Value;
             _context = context;
             _unitOfWork = unitOfWork;
-
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Generates a new API key asynchronously.
+        /// </summary>
+        /// <returns>The generated API key as a string.</returns>
         public async Task<string> GenerateApiKeyAsync()
         {
-            using var hmac = new HMACSHA256();
-            var apiKey = Convert.ToBase64String(hmac.Key);
-
-            var hashedApiKey = HashApiKey(apiKey);
-            var apiKeyEntity = new ApiKey
+            try
             {
-                Key = hashedApiKey,
-                CreatedAt = DateTime.UtcNow,
-            };
+                using var hmac = new HMACSHA256();
+                var apiKey = Convert.ToBase64String(hmac.Key);
 
-            _context.ApiKeys.Add(apiKeyEntity);
-            await _unitOfWork.CompleteAsync(); 
+                var hashedApiKey = HashApiKey(apiKey);
+                var apiKeyEntity = new ApiKey
+                {
+                    Key = hashedApiKey,
+                    CreatedAt = DateTime.UtcNow,
+                };
 
-            return apiKey;
+                _context.ApiKeys.Add(apiKeyEntity);
+                await _unitOfWork.CompleteAsync();
+
+                return apiKey;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error generating API key: {ex.Message}");
+                throw new Exception("Error generating API key", ex);
+            }
         }
+
+
+        /// <summary>
+        /// Hashes the provided API key string.
+        /// </summary>
+        /// <param name="apiKey">The API key to hash.</param>
+        /// <returns>The hashed API key.</returns>
 
         public string HashApiKey(string apiKey)
         {
@@ -78,11 +98,23 @@ namespace Book_subscription.Server.Core.Services
 
             return sr.ReadToEnd();
         }
+        /// <summary>
+        /// Validates if the provided API key is valid asynchronously.
+        /// </summary>
+        /// <param name="apiKey">The API key to validate.</param>
+        /// <returns>True if the API key is valid; otherwise, false.</returns>
         public async Task<bool> ValidateApiKeyAsync(string apiKey)
         {
-            var hashedApiKey = HashApiKey(apiKey);
-            return await _context.ApiKeys.AnyAsync(k => k.Key == hashedApiKey);
+            try
+            {
+                var hashedApiKey = HashApiKey(apiKey);
+                return await _context.ApiKeys.AnyAsync(k => k.Key == hashedApiKey);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error validating API key: {ex.Message}");
+                throw new Exception("Error validating API key", ex);
+            }
         }
-
     }
 }

@@ -147,3 +147,16 @@ C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\
 C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\Namotion.Reflection.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NJsonSchema.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NJsonSchema.Annotations.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NJsonSchema.NewtonsoftJson.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NJsonSchema.Yaml.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NSwag.Annotations.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NSwag.AspNetCore.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NSwag.Core.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NSwag.Core.Yaml.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NSwag.Generation.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\NSwag.Generation.AspNetCore.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.Server\bin\Debug\net8.0\YamlDotNet.dll

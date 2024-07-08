@@ -81,7 +81,7 @@ builder.Services.AddSwaggerGen();
 // Register repositories in the DI Container
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();  
-//builder.Services.AddScoped<IResellerRepository, ResellerRepository>();
+builder.Services.AddScoped<IResellerRepository, ResellerRepository>();
 
 
 // Register services in the DI Container
@@ -89,8 +89,8 @@ builder.Services.AddScoped<IJwtAuthService, JwtAuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();    
-/*builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
-builder.Services.AddScoped<IResellerService, ResellerService>();*/
+builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
+builder.Services.AddScoped<IResellerService, ResellerService>();
 
 
 // Register Unit Of Work

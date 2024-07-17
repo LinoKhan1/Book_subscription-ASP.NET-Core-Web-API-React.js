@@ -43,9 +43,24 @@ function BookCatalog() {
     );
 
     async function fetchBookData() {
-        const response = await fetch('api/book');
-        const data = await response.json();
-        setBooks(data);
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch('api/book', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch books');
+            }
+
+            const data = await response.json();
+            setBooks(data);
+        } catch (error) {
+            console.error('Error fetching books:', error);
+
+        }
+        
     }
 }
 

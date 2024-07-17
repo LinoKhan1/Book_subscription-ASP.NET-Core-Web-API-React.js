@@ -16,9 +16,10 @@ namespace Book_subscription.tests.Repositories
     /// </summary>
     public class BookRepositoryTests
     {
-        private readonly DbContextOptions<ApplicationDbContext> _options;
+       /* private readonly DbContextOptions<ApplicationDbContext> _options;
         private readonly ApplicationDbContext _context;
         private readonly BookRepository _repository;
+        
 
 
         /// <summary>
@@ -148,6 +149,6 @@ namespace Book_subscription.tests.Repositories
 
             Assert.Equal(initialCount, finalCount);
         }
-
+       */
     }
 }

@@ -464,3 +464,15 @@ C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\n
 C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\obj\Debug\net8.0\MvcTestingAppManifest.json
 C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\Namotion.Reflection.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NJsonSchema.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NJsonSchema.Annotations.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NJsonSchema.NewtonsoftJson.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NJsonSchema.Yaml.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NSwag.Annotations.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NSwag.AspNetCore.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NSwag.Core.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NSwag.Core.Yaml.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NSwag.Generation.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\NSwag.Generation.AspNetCore.dll
+C:\Users\User\source\repos\Book_subscription\Book_subscription.tests\bin\Debug\net8.0\YamlDotNet.dll

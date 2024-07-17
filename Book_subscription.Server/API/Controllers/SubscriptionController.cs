@@ -2,117 +2,62 @@
 using Book_subscription.Server.API.DTOs.SubscriptionDTOs;
 using Book_subscription.Server.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Book_subscription.Server.API.Controllers
 {
-    /// <summary>
-    /// Controller for managing subscriptions to books.
-    /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Route("api/[controller]")]
     public class SubscriptionController : ControllerBase
     {
         private readonly ISubscriptionService _subscriptionService;
-        private readonly IMapper _mapper;
 
-        /// <summary>
-        /// Constructor for SubscriptionController.
-        /// </summary>
-        /// <param name="subscriptionService">The subscription service instance.</param>
-        /// <param name="mapper">The AutoMapper instance.</param>
-        public SubscriptionController(ISubscriptionService subscriptionService, IMapper mapper)
+        public SubscriptionController(ISubscriptionService subscriptionService)
         {
             _subscriptionService = subscriptionService;
-            _mapper = mapper;
         }
 
-        /// <summary>
-        /// Endpoint for subscribing to a book.
-        /// </summary>
-        /// <param name="subscriptionDTO">The subscription data.</param>
-        /// <returns>ActionResult containing the subscribed subscriptionDTO.</returns>
-        [HttpPost("subscribe")]
-        public async Task<IActionResult> Subscribe([FromBody] SubscriptionDTO subscriptionDTO)
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetUserSubscriptions()
         {
-            try
-            {
-                var result = await _subscriptionService.SubscribeAsync(subscriptionDTO);
-                return Ok(result);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message );
-            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var subscriptions = await _subscriptionService.GetUserSubscriptionsAsync(userId);
+            return Ok(subscriptions);
         }
 
-        /// <summary>
-        /// Endpoint for unsubscribing from a book.
-        /// </summary>
-        /// <param name="bookId">The ID of the book to unsubscribe from.</param>
-        /// <returns>ActionResult indicating success or failure.</returns>
-        [HttpDelete("unsubscribe/{bookId}")]
-        public async Task<IActionResult> Unsubscribe(int bookId)
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetSubscription(int id)
         {
-            // Get UserId from claims or context
-            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            try
+            var subscription = await _subscriptionService.GetSubscriptionAsync(id);
+            if (subscription == null)
             {
-                if (userId != null) 
-                {
-                    await _subscriptionService.UnsubscribeAsync(bookId, userId);
-                    return Ok("Unsubscribed successfully.");
-                }
-                else
-                {
-                    return BadRequest();
-                }
-               
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = ex.Message });
-            }
+            return Ok(subscription);
         }
 
-        /// <summary>
-        /// Endpoint for retrieving subscription details for a book.
-        /// </summary>
-        /// <param name="bookId">The ID of the book.</param>
-        /// <returns>ActionResult containing the subscription details.</returns>
-        [HttpGet("subscription/{bookId}")]
-        public async Task<IActionResult> GetSubscription(int bookId)
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Subscribe([FromBody] SubscribeDTO subscribeDto)
         {
-            // Get UserId from claims or context
-            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            try
-            {
-                if(userId != null)
-                {
-                    var result = await _subscriptionService.GetSubscriptionAsync(bookId, userId);
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest();
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = ex.Message });
-            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var subscription = await _subscriptionService.SubscribeAsync(userId, subscribeDto);
+            return CreatedAtAction(nameof(GetSubscription), new { id = subscription.SubscriptionId }, subscription);
         }
 
-
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Unsubscribe(int id)
+        {
+            await _subscriptionService.UnsubscribeAsync(id);
+            return NoContent();
+        }
     }
+
 }
